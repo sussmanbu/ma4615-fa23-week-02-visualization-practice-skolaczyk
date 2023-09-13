@@ -1,7 +1,7 @@
 ---
 title: "Week 02: COVID Visualization Activity"
 date: "September, 11 2023"
-author: "**`[[`**Your Name**`]]`**"
+author: "Sara Kolaczyk"
 ---
 
 Today, we'll be working with a data set related to COVID.
@@ -21,9 +21,9 @@ Try using the different data sets and see which ones are good for making which p
 
 
 ```{r first_plot}
-ggplot(covid_data_count, aes(x = date, y = Cases)) + geom_point()
+library(scales)
+ggplot(covid_data_count, aes(x = date, y = Cases)) + stat_summary(aes(color = race), fun = mean, geom = "line") + scale_y_continuous(labels = label_number(suffix = "K", scale = 1/1000), breaks = seq(0, 400000, by = 200000)) + theme(legend.title = element_blank()) + labs(title = "Average Covid Cases by Race") + theme(plot.title = element_text(hjust = 0.5))
 ```
-
 
 
 If you want to only look at a specific state, you can do it like this.
@@ -35,7 +35,18 @@ covid_data_count |>
   ggplot(aes(x = date, y = Cases, color = race)) + geom_line()
 ```
 
-1. Write code for a plot and describe what you observe?
+1. Write code for a plot and describe what you observe? 
+
+I am plotting the average number of cases by race over time. There is an overall increase in cases between April and January 
+
 2. Are there any conclusions you can draw?
+
+From April to January the White cases increase more rapidly than other cases
+
 3. What were you not able to do due to not having the R knowledge?
+
+I was not able to remove the "total" cases and alter the axes to have a clearer view of the output for each specific race. 
+
 4. What other data would be useful to better understand this data?
+
+gender and age were missing from all four data sets and would be useful to analyze. 
